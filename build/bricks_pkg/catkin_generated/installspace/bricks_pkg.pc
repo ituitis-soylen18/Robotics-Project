@@ -1,0 +1,8 @@
+prefix=/home/zumra/robot_arm/install
+
+Name: bricks_pkg
+Description: Description of bricks_pkg
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
