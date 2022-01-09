@@ -9,10 +9,14 @@ from trajectory_msgs.msg import JointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
 import rospy
 
+import math
+import moveit_commander
+
 waypoints = [[0.0, -1.44, 1.4, 0.6, 0, -0.33], [0,0,0,0,0,0]]
 
 def main():
-
+    move_group = moveit_commander.MoveGroupCommander('manipulator')
+    
     rospy.init_node('send_joints')
     pub = rospy.Publisher('/arm_controller/command',
                           JointTrajectory,
@@ -32,6 +36,9 @@ def main():
     traj.header.stamp = rospy.Time.now()
 
     while not rospy.is_shutdown():
+        curPose = move_group.get_current_pose().pose
+        print(curPose)
+        print(curPose.position.x, curPose.position.y)
         cnt += 1
 
         if cnt%2 == 1:
